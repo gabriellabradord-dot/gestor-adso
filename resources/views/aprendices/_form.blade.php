@@ -1,6 +1,6 @@
 @csrf
 
-{{-- Bloque de errores de validación --}}
+
 @if ($errors->any())
     <div class="mb-6 p-4 rounded-xl bg-red-950/40 border border-red-900/50 text-red-400 text-xs space-y-1">
         <strong class="font-bold uppercase tracking-wider">Por favor corrige los siguientes errores:</strong>

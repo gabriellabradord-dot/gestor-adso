@@ -14,7 +14,7 @@ class StoreUpdateAprendizRequest extends FormRequest
 
     public function rules(): array
     {
-        // Obtener el ID del aprendiz si estamos editando
+
         $id = $this->route('aprendiz')?->id;
 
         return [
