@@ -4,30 +4,52 @@ namespace App\Http\Controllers;
 
 use App\Models\Aprendiz;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreUpdateAprendizRequest;
 
 class AprendizController extends Controller
 {
-    public function index()
-{
-    $aprendices = Aprendiz::paginate(10); // Muestra 10 aprendices por página
-    return view('aprendices.index', compact('aprendices'));
-}
+    public function index(Request $request)
+    {
+        $q = $request->query('q');
+
+        $aprendices = Aprendiz::query()
+            ->when($q, function($query) use ($q) {
+                $query->where('nombre', 'like', "%{$q}%")
+                      ->orWhere('documento', 'like', "%{$q}%");
+            })
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('aprendices.index', compact('aprendices', 'q'));
+    }
 
     public function create()
     {
-        return view('aprendices.create');
+        $aprendiz = new Aprendiz();
+        return view('aprendices.create', compact('aprendiz'));
     }
 
-    public function store(Request $request)
+    public function store(StoreUpdateAprendizRequest $request)
     {
-        $request->validate([
-            'nombre' => 'required',
-            'documento' => 'required',
-            'email' => 'required|email',
-        ]);
+        Aprendiz::create($request->validated());
+        return redirect()->route('aprendices.index')->with('ok', 'Aprendiz creado');
+    }
 
-        Aprendiz::create($request->all());
+    public function edit(Aprendiz $aprendiz)
+    {
+        return view('aprendices.edit', compact('aprendiz'));
+    }
 
-        return redirect()->route('aprendices.index')->with('success', 'Aprendiz agregado con éxito');
+    public function update(StoreUpdateAprendizRequest $request, Aprendiz $aprendiz)
+    {
+        $aprendiz->update($request->validated());
+        return redirect()->route('aprendices.index')->with('ok', 'Aprendiz actualizado');
+    }
+
+    public function destroy(Aprendiz $aprendiz)
+    {
+        $aprendiz->delete();
+        return redirect()->route('aprendices.index')->with('ok', 'Aprendiz eliminado');
     }
 }

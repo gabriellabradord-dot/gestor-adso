@@ -7,4 +7,4 @@ Route::get('/', function () {
     return redirect()->route('aprendices.index');
 });
 
-Route::resource('aprendices', AprendizController::class);
+Route::resource('aprendices', AprendizController::class)->parameters(['aprendices' => 'aprendiz']);

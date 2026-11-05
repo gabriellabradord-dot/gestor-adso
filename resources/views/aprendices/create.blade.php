@@ -14,37 +14,8 @@
             <p class="text-xs text-gray-500 mt-1 uppercase tracking-wider">Gestor ADSO / Base de datos</p>
         </div>
 
-        <form action="{{ route('aprendices.store') }}" method="POST" class="space-y-6">
-            @csrf
-            
-            <div>
-                <label class="block text-xs uppercase tracking-wider text-gray-400 font-medium mb-2">Nombre Completo</label>
-                <input type="text" name="nombre" placeholder="Ej. Gabriel Labrador" required 
-                    class="w-full bg-[#181818] border border-[#2a2a2a] rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-white transition">
-            </div>
-
-            <div>
-                <label class="block text-xs uppercase tracking-wider text-gray-400 font-medium mb-2">Documento de Identidad</label>
-                <input type="text" name="documento" placeholder="1000000000" required 
-                    class="w-full bg-[#181818] border border-[#2a2a2a] rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-white transition">
-            </div>
-
-            <div>
-                <label class="block text-xs uppercase tracking-wider text-gray-400 font-medium mb-2">Correo Electrónico</label>
-                <input type="email" name="email" placeholder="correo@ejemplo.com" required 
-                    class="w-full bg-[#181818] border border-[#2a2a2a] rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-white transition">
-            </div>
-
-            <div class="flex items-center justify-end space-x-3 pt-4 border-t border-[#222222]">
-                <a href="{{ route('aprendices.index') }}" 
-                    class="px-5 py-2.5 rounded-xl border border-[#2a2a2a] text-xs uppercase tracking-wider font-semibold text-gray-400 hover:text-white hover:bg-[#1a1a1a] transition">
-                    Cancelar
-                </a>
-                <button type="submit" 
-                    class="px-5 py-2.5 rounded-xl bg-white text-black text-xs uppercase tracking-wider font-bold hover:bg-gray-200 active:scale-95 transition">
-                    Guardar
-                </button>
-            </div>
+        <form action="{{ route('aprendices.store') }}" method="POST">
+            @include('aprendices._form', ['aprendiz' => $aprendiz])
         </form>
     </div>
 
