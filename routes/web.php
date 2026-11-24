@@ -16,7 +16,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return redirect()->route('aprendices.index');
     })->name('dashboard');
 
-    Route::resource('aprendices', AprendizController::class);
+    Route::resource('aprendices', AprendizController::class)
+        ->parameters(['aprendices' => 'aprendiz']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

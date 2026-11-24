@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-label="Modelo de datos simplificado">
+  <rect width="1200" height="620" fill="#141414"/>
+  <g stroke="#C9A227" stroke-width="1" fill="none" opacity=".5"><path d="M40 40H1160V580H40Z"/></g>
+  <text x="80" y="95" font-family="Cormorant Garamond, Georgia, serif" font-size="34" fill="#E8C766">Dos tablas verificadas</text>
+
+  <g font-family="JetBrains Mono, monospace" font-size="19" fill="#F5F1E8">
+    <rect x="90" y="140" width="430" height="285" fill="#0A0A0A" stroke="#C9A227" stroke-width="2"/>
+    <rect x="90" y="140" width="430" height="52" fill="#C9A227"/>
+    <text x="110" y="173" fill="#0A0A0A" font-weight="700">aprendices</text>
+    <text x="110" y="225">id</text><text x="470" y="225" fill="#C9A227">PK</text>
+    <text x="110" y="263">nombre · 120</text>
+    <text x="110" y="301">documento · 40</text><text x="470" y="301" fill="#C9A227">UNIQUE</text>
+    <text x="110" y="339">correo · 120</text><text x="470" y="339" fill="#C9A227">UNIQUE</text>
+    <text x="110" y="377">ficha_id</text><text x="470" y="377" fill="#C9A227">NULL · sin FK</text>
+    <text x="110" y="407">timestamps</text>
+  </g>
+
+  <g font-family="JetBrains Mono, monospace" font-size="19" fill="#F5F1E8">
+    <rect x="680" y="140" width="430" height="285" fill="#0A0A0A" stroke="#C9A227" stroke-width="2"/>
+    <rect x="680" y="140" width="430" height="52" fill="#C9A227"/>
+    <text x="700" y="173" fill="#0A0A0A" font-weight="700">users</text>
+    <text x="700" y="225">id</text><text x="1060" y="225" fill="#C9A227">PK</text>
+    <text x="700" y="263">name</text>
+    <text x="700" y="301">email</text><text x="1060" y="301" fill="#C9A227">UNIQUE</text>
+    <text x="700" y="339">password</text><text x="1060" y="339" fill="#C9A227">hashed</text>
+    <text x="700" y="377">email_verified_at</text>
+    <text x="700" y="407">remember_token · timestamps</text>
+  </g>
+
+  <path d="M520 370 C 600 370, 620 370, 680 370" stroke="#E8C766" stroke-width="1.5" stroke-dasharray="7 7" fill="none"/>
+  <text x="600" y="485" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" fill="#F5F1E8">ficha_id no declara llave foránea</text>
+  <text x="600" y="520" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" fill="#C9A227">Entidad Ficha: [POR CONFIRMAR]</text>
+</svg>

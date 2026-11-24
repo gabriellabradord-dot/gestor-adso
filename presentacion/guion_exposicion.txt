@@ -1,0 +1,208 @@
+GESTOR ADSO - GUION PARA EXPLICAR EL CODIGO
+============================================================
+Duracion sugerida: 7 minutos de explicacion y 2 minutos de demostracion.
+Objetivo: explicar el flujo real del proyecto sin leer archivos linea por linea.
+
+ANTES DE EXPONER
+----------------
+1. Desde la raiz del proyecto ejecuta: ./start
+2. Usa la URL que anuncie php artisan serve en la terminal. Si el puerto 8000
+   esta ocupado, Laravel puede iniciar en otro, por ejemplo 8001.
+3. Abre esa URL e inicia sesion con una cuenta local ya preparada. No muestres
+   contrasenas, tokens ni el contenido de .env.
+4. Para detener todos los procesos, pulsa Ctrl+C en la terminal de ./start.
+5. En la exposicion, abre el editor con los archivos indicados abajo. No abras
+   vendor/, node_modules/, storage/ ni archivos con credenciales.
+
+APERTURA - 20 SEGUNDOS
+----------------------
+Di:
+"Gestor ADSO es una aplicacion web para consultar y administrar aprendices.
+El proyecto usa Laravel para las rutas, la validacion y el acceso a datos; las
+vistas Blade presentan el listado y los formularios. Tambien incluye inicio y
+cierre de sesion protegidos. Voy a recorrer una operacion desde la ruta hasta
+la base de datos y de vuelta a la pantalla."
+
+RECORRIDO DEL CODIGO
+--------------------
+
+1. Dependencias y arranque - 30 segundos
+Archivos para mostrar:
+- composer.json
+- package.json
+- start
+
+Di:
+"composer.json declara Laravel y las herramientas PHP; package.json define
+Vite y los recursos del frontend. El archivo start delega al comando de
+ desarrollo de Composer, que inicia Laravel, Vite, el trabajador de cola y los
+logs. No contiene la logica del CRUD."
+
+No digas que la aplicacion necesita Pail o la cola para guardar un aprendiz:
+son procesos de desarrollo incluidos en el comando actual, no pasos del CRUD.
+
+2. Rutas - 40 segundos
+Archivos para mostrar:
+- routes/web.php
+- routes/auth.php
+
+Di:
+"web.php define el inicio, el dashboard y el recurso aprendices. Las rutas
+privadas estan dentro de auth y verified: requieren una sesion iniciada y un
+correo verificado. El recurso conecta las URL con AprendizController. El
+parametro se llama aprendiz para coincidir con el modelo y con la firma del
+controlador. Las rutas de login y logout estan en auth.php; cerrar sesion usa
+POST, no un enlace GET."
+
+Punto importante:
+"La ruta raiz redirige al login. El recurso Laravel declara las operaciones
+convencionales; show aparece en la lista de rutas, pero el controlador no tiene
+un metodo show implementado. No voy a presentar esa pantalla como terminada."
+
+3. Controlador - 60 segundos
+Archivo para mostrar:
+- app/Http/Controllers/AprendizController.php
+
+Di:
+"El controlador coordina cada peticion. index lee el filtro q, busca por nombre
+o documento, ordena y pagina de diez en diez. create prepara un modelo vacio.
+store guarda solo datos validados. edit recibe el aprendiz por model binding.
+update modifica ese registro y destroy lo elimina. Al guardar o borrar, vuelve
+al listado y muestra un mensaje."
+
+Muestra solo index, store y update. Resume edit y destroy; no leas cada linea.
+
+4. Validacion y acceso a datos - 70 segundos
+Archivos para mostrar:
+- app/Http/Requests/StoreUpdateAprendizRequest.php
+- app/Models/Aprendiz.php
+- database/migrations/2026_10_22_122958_create_aprendizs_table.php
+
+Di:
+"La misma Form Request valida alta y edicion. Exige nombre, documento y correo;
+limita su longitud y comprueba que documento y correo sean unicos. En una
+edicion, ignore(id) permite conservar los datos unicos del mismo registro.
+La validacion devuelve errores en espanol. El modelo Aprendiz indica que
+campos se pueden asignar de forma masiva. La migracion crea nombre, documento,
+correo y ficha_id, ademas de los identificadores y marcas de tiempo."
+
+Aclara:
+"ficha_id es nullable y numerico, pero esta migracion no declara una llave
+foranea ni hay aqui una relacion Eloquent con una entidad Ficha."
+
+5. Vistas del CRUD - 60 segundos
+Archivos para mostrar:
+- resources/views/aprendices/index.blade.php
+- resources/views/aprendices/_form.blade.php
+- resources/views/aprendices/create.blade.php
+- resources/views/aprendices/edit.blade.php
+
+Di:
+"index.blade.php presenta el listado, la busqueda, la paginacion y las
+acciones. _form.blade.php comparte los campos entre alta y edicion; old()
+reutiliza lo escrito si la validacion falla. create y edit preparan sus
+formularios. En edit se envia PUT mediante method spoofing y se pasa el
+parametro aprendiz con el mismo nombre que espera la ruta."
+
+Puedes mostrar como el listado confirma antes de enviar DELETE y como los
+formularios incluyen CSRF. No cambies datos reales durante la exposicion.
+
+6. Autenticacion y cierre de sesion - 40 segundos
+Archivos para mostrar:
+- resources/views/aprendices/index.blade.php, encabezado
+- resources/views/layouts/navigation.blade.php
+- resources/views/auth/verify-email.blade.php
+- routes/auth.php
+
+Di:
+"En el listado hay un boton visible Cerrar sesion. Es un formulario POST con
+CSRF que usa la ruta logout. La navegacion compartida y la pantalla de
+verificacion tambien ofrecen el cierre. Laravel invalida la sesion a traves de
+AuthenticatedSessionController. El middleware auth protege el acceso; verified
+ademas exige verificacion del correo."
+
+7. Estilos y datos locales - 30 segundos
+Archivos para mostrar:
+- resources/css/app.css
+- resources/js/app.js
+- vite.config.js
+- database/seeders/AprendizSeeder.php y DatabaseSeeder.php, si se usaron
+
+Di:
+"Vite compila los recursos del frontend. app.css define el aspecto y los
+estados adaptables del listado; app.js carga el comportamiento del frontend.
+Los seeders sirven para crear datos de ejemplo cuando se ejecutan; no son la
+fuente de las reglas del CRUD."
+
+No atribuyas a Alpine, Tailwind o Vite la validacion del servidor: esa regla
+esta en StoreUpdateAprendizRequest.
+
+8. Pruebas y estado - 30 segundos
+Archivos para mostrar:
+- tests/Feature/Auth/AuthenticationTest.php
+- tests/Feature/ProfileTest.php
+- salida de php artisan test
+
+Di:
+"La suite actual pasa 26 pruebas y 64 aserciones. Cubre autenticacion, perfil
+y otras funciones de Breeze. No debo afirmar que existe cobertura automatizada
+completa del CRUD de aprendices; esa cobertura se puede ampliar."
+
+DEMOSTRACION - 2 MINUTOS
+------------------------
+1. Inicia sesion con una cuenta local preparada.
+2. En el listado, busca por nombre o documento y muestra que la paginacion
+   conserva el filtro.
+3. Entra a editar un registro de prueba y muestra el formulario precargado.
+   El problema anterior al generar la ruta de actualizacion ya fue corregido:
+   routes/web.php usa el parametro aprendiz y la vista lo pasa con esa clave.
+4. No guardes cambios sobre datos reales. Si creas un registro temporal,
+   utiliza datos unicos y eliminalo al terminar.
+5. Pulsa Cerrar sesion y confirma que regresas al acceso publico.
+
+La presentacion HTML existente conserva una captura del HTTP 500 anterior al
+arreglo; las diapositivas 14 y 17 aun presentan ese parametro como pendiente.
+Tambien muestran metricas antiguas de 25 pruebas y 62 aserciones. No presentes
+ese roadmap como vigente: llama la captura evidencia historica y no cites esas
+cifras como actuales. La suite actual tiene 26 pruebas y 64 aserciones. El
+archivo GUION.md tambien es anterior; este TXT contiene el guion actualizado.
+
+QUE NO DECIR / QUE NO MOSTRAR
+----------------------------
+- No digas que hay roles o permisos por tipo de usuario. authorize() devuelve
+  true; no se implementa una politica de roles en esta Form Request.
+- No digas que ficha_id tiene llave foranea: la migracion no la define.
+- No digas que show esta terminado: la ruta resource existe, pero falta el
+  metodo show del controlador.
+- No digas que las 26 pruebas cubren todos los casos del CRUD.
+- No presentes la captura historica del HTTP 500 como estado actual.
+- No muestres .env, contrasenas, claves, tokens, datos personales ni cuentas
+  locales. No abras vendor/ ni node_modules/ para explicar codigo propio.
+- No ejecutes eliminaciones ni ediciones sobre registros que no sean de prueba.
+- No leas el codigo completo: sigue una peticion por sus capas y explica la
+  responsabilidad de cada archivo.
+
+PREGUNTAS POSIBLES
+------------------
+"Como se evita repetir la validacion?"
+La Form Request StoreUpdateAprendizRequest se reutiliza en store y update.
+
+"Como se evita borrar por accidente?"
+El formulario de borrado envia DELETE con CSRF y muestra confirm() en el
+navegador. Esa confirmacion no reemplaza permisos de autorizacion.
+
+"Que corrige el error de edicion?"
+El parametro de ruta ahora se llama aprendiz, igual que el argumento tipado del
+controlador, y la vista lo entrega explicitamente al generar la URL update.
+
+"Que falta?"
+Cobertura automatizada especifica para el CRUD, politica de autorizacion real,
+una entidad/relacion de ficha si el requisito la necesita y la accion show.
+
+CIERRE - 15 SEGUNDOS
+--------------------
+Di:
+"El recorrido muestra como una ruta protegida llega al controlador, valida los
+datos, usa Eloquent y devuelve una vista. El proyecto funciona y sus limites
+estan identificados: especialmente autorizacion por roles, la relacion de
+ficha, show y pruebas especificas del CRUD. Gracias."

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-label="Arquitectura del gestor ADSO">
+  <rect width="1200" height="620" fill="#141414"/>
+  <g stroke="#C9A227" stroke-width="1" fill="none" opacity=".55">
+    <path d="M40 40H1160V580H40Z"/>
+    <path d="M40 310H1160"/>
+    <path d="M600 40V580"/>
+  </g>
+  <g font-family="Inter, Arial, sans-serif" font-size="18" fill="#F5F1E8" text-anchor="middle">
+    <g>
+      <rect x="95" y="95" width="210" height="82" fill="#0A0A0A" stroke="#C9A227"/>
+      <text x="200" y="130" font-family="Cormorant Garamond, Georgia, serif" font-size="27" fill="#E8C766">Navegador</text>
+      <text x="200" y="158" font-size="15" fill="#F5F1E8" opacity=".8">GET / POST</text>
+    </g>
+    <g>
+      <rect x="365" y="95" width="210" height="82" fill="#0A0A0A" stroke="#C9A227"/>
+      <text x="470" y="130" font-family="Cormorant Garamond, Georgia, serif" font-size="27" fill="#E8C766">Rutas</text>
+      <text x="470" y="158" font-size="15" fill="#F5F1E8" opacity=".8">routes/web.php</text>
+    </g>
+    <g>
+      <rect x="635" y="95" width="210" height="82" fill="#0A0A0A" stroke="#C9A227"/>
+      <text x="740" y="130" font-family="Cormorant Garamond, Georgia, serif" font-size="27" fill="#E8C766">Middleware</text>
+      <text x="740" y="158" font-size="15" fill="#F5F1E8" opacity=".8">auth · verified</text>
+    </g>
+    <g>
+      <rect x="905" y="95" width="210" height="82" fill="#0A0A0A" stroke="#C9A227"/>
+      <text x="1010" y="130" font-family="Cormorant Garamond, Georgia, serif" font-size="27" fill="#E8C766">Form Request</text>
+      <text x="1010" y="158" font-size="15" fill="#F5F1E8" opacity=".8">validated()</text>
+    </g>
+    <g>
+      <rect x="905" y="400" width="210" height="82" fill="#0A0A0A" stroke="#C9A227"/>
+      <text x="1010" y="435" font-family="Cormorant Garamond, Georgia, serif" font-size="27" fill="#E8C766">Controlador</text>
+      <text x="1010" y="463" font-size="15" fill="#F5F1E8" opacity=".8">AprendizController</text>
+    </g>
+    <g>
+      <rect x="635" y="400" width="210" height="82" fill="#0A0A0A" stroke="#C9A227"/>
+      <text x="740" y="435" font-family="Cormorant Garamond, Georgia, serif" font-size="27" fill="#E8C766">Modelo</text>
+      <text x="740" y="463" font-size="15" fill="#F5F1E8" opacity=".8">Eloquent · Aprendiz</text>
+    </g>
+    <g>
+      <rect x="365" y="400" width="210" height="82" fill="#0A0A0A" stroke="#C9A227"/>
+      <text x="470" y="435" font-family="Cormorant Garamond, Georgia, serif" font-size="27" fill="#E8C766">MariaDB</text>
+      <text x="470" y="463" font-size="15" fill="#F5F1E8" opacity=".8">13.0.2</text>
+    </g>
+    <g>
+      <rect x="95" y="400" width="210" height="82" fill="#0A0A0A" stroke="#C9A227"/>
+      <text x="200" y="435" font-family="Cormorant Garamond, Georgia, serif" font-size="27" fill="#E8C766">Blade</text>
+      <text x="200" y="463" font-size="15" fill="#F5F1E8" opacity=".8">tabla + flash</text>
+    </g>
+  </g>
+  <g stroke="#E8C766" stroke-width="2" fill="none">
+    <path d="M305 136H365M575 136H635M845 136H905"/>
+    <path d="M1010 177V400M905 441H845M635 441H575M305 441H365"/>
+    <path d="M200 177V400"/>
+  </g>
+  <g fill="#E8C766">
+    <path d="M365 136l-9-5v10zM635 136l-9-5v10zM905 136l-9-5v10zM845 441l9-5v10zM575 441l9-5v10zM365 441l9-5v10zM200 400l-5-9h10z"/>
+  </g>
+  <text x="600" y="285" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="22" fill="#F5F1E8" opacity=".75">Una petición, una capa responsable</text>
+  <text x="600" y="320" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="15" fill="#C9A227">web.php → auth → Request → Controller → Model → BD → Blade</text>
+</svg>

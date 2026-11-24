@@ -1,0 +1,1534 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Gestor ADSO · Presentación editorial</title>
+        <style>
+            @font-face {
+                font-family: "Cormorant Garamond";
+                src: url("assets/fuentes/cormorant-garamond-400.ttf")
+                    format("truetype");
+                font-weight: 400;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: "Cormorant Garamond";
+                src: url("assets/fuentes/cormorant-garamond-600.ttf")
+                    format("truetype");
+                font-weight: 600;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: "Cormorant Garamond";
+                src: url("assets/fuentes/cormorant-garamond-700.ttf")
+                    format("truetype");
+                font-weight: 700;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: "Inter";
+                src: url("assets/fuentes/inter-400.ttf") format("truetype");
+                font-weight: 400;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: "Inter";
+                src: url("assets/fuentes/inter-500.ttf") format("truetype");
+                font-weight: 500;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: "Inter";
+                src: url("assets/fuentes/inter-600.ttf") format("truetype");
+                font-weight: 600;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: "JetBrains Mono";
+                src: url("assets/fuentes/jetbrains-mono-400.ttf")
+                    format("truetype");
+                font-weight: 400;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: "JetBrains Mono";
+                src: url("assets/fuentes/jetbrains-mono-700.ttf")
+                    format("truetype");
+                font-weight: 700;
+                font-display: swap;
+            }
+            :root {
+                --k: #0a0a0a;
+                --c: #141414;
+                --g: #c9a227;
+                --l: #e8c766;
+                --h: #f5f1e8;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                margin: 0;
+                background: var(--k);
+                color: var(--h);
+            }
+            body {
+                font-family: "Inter", Arial, sans-serif;
+                -webkit-font-smoothing: antialiased;
+            }
+            .stage {
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+            }
+            .deck {
+                position: relative;
+                width: 1280px;
+                height: 720px;
+                flex: none;
+                box-shadow: 0 0 90px rgba(0, 0, 0, 0.7);
+            }
+            .slide {
+                position: absolute;
+                inset: 0;
+                width: 1280px;
+                height: 720px;
+                background: var(--c);
+                display: none;
+                overflow: hidden;
+            }
+            .slide.active {
+                display: block;
+            }
+            .canvas {
+                position: absolute;
+                inset: 0;
+                padding: 44px 72px 40px;
+                display: grid;
+                grid-template-columns: repeat(12, 1fr);
+                column-gap: 24px;
+                grid-template-rows: 24px 1fr 28px;
+                row-gap: 18px;
+            }
+            .furniture {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+            }
+            .ghost {
+                position: absolute;
+                width: 430px;
+                opacity: 0.055;
+                pointer-events: none;
+                right: -58px;
+                top: 150px;
+            }
+            .slide:nth-of-type(3) .ghost {
+                top: auto;
+                bottom: -110px;
+                right: -70px;
+            }
+            .slide:nth-of-type(7) .ghost {
+                top: 60px;
+                right: auto;
+                left: -120px;
+            }
+            .slide:nth-of-type(12) .ghost {
+                top: 210px;
+                right: 420px;
+            }
+            .slide:nth-of-type(15) .ghost {
+                top: -130px;
+                right: 180px;
+            }
+            .eyebrow {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 12px;
+                letter-spacing: 0.26em;
+                text-transform: uppercase;
+                color: var(--g);
+                grid-column: 1/10;
+                grid-row: 1;
+                align-self: center;
+            }
+            .folio {
+                grid-column: 10/13;
+                grid-row: 1;
+                text-align: right;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 12px;
+                letter-spacing: 0.16em;
+                color: var(--l);
+            }
+            .rule {
+                height: 1px;
+                background: var(--g);
+                opacity: 0.8;
+            }
+            .vlabel {
+                position: absolute;
+                left: 24px;
+                top: 50%;
+                transform: translateY(-50%) rotate(-90deg);
+                transform-origin: center;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 11px;
+                letter-spacing: 0.3em;
+                color: var(--g);
+                opacity: 0.75;
+            }
+            h1,
+            h2,
+            h3,
+            p {
+                margin: 0;
+            }
+            h1,
+            h2 {
+                font-family: "Cormorant Garamond", Georgia, serif;
+                font-weight: 600;
+                letter-spacing: -0.015em;
+            }
+            h2 {
+                font-size: 52px;
+                line-height: 0.98;
+                color: var(--h);
+            }
+            small,
+            .mono {
+                font-family: "JetBrains Mono", monospace;
+                color: var(--l);
+            }
+            .bottom {
+                grid-column: 1/13;
+                grid-row: 3;
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-between;
+                border-top: 1px solid rgba(201, 162, 39, 0.45);
+                padding-top: 8px;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 11px;
+                letter-spacing: 0.18em;
+                color: var(--g);
+            }
+            .bottom b {
+                font-weight: 400;
+                color: var(--h);
+                opacity: 0.8;
+            }
+            figcaption {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 11px;
+                line-height: 1.45;
+                color: var(--l);
+                padding-top: 7px;
+            }
+            figure {
+                margin: 0;
+                border: 1px solid rgba(201, 162, 39, 0.7);
+                background: var(--k);
+                padding: 8px;
+            }
+            figure img,
+            figure svg {
+                display: block;
+                width: 100%;
+                object-fit: contain;
+                background: var(--k);
+            }
+            .tag {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 10px;
+                letter-spacing: 0.22em;
+                color: var(--g);
+                border-top: 1px solid var(--g);
+                padding-top: 5px;
+                display: inline-block;
+            }
+            ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+            li {
+                position: relative;
+            }
+            .s-cover .canvas {
+                grid-template-rows: 24px 1fr 28px;
+            }
+            .s-cover .mark {
+                position: absolute;
+                left: 96px;
+                top: 150px;
+                width: 112px;
+            }
+            .s-cover h1 {
+                position: absolute;
+                left: 96px;
+                top: 300px;
+                font-size: 112px;
+                line-height: 0.9;
+                max-width: 920px;
+            }
+            .s-cover .sub {
+                position: absolute;
+                left: 100px;
+                top: 432px;
+                font-family: "Cormorant Garamond", serif;
+                font-size: 40px;
+                color: var(--l);
+            }
+            .s-cover .meta {
+                position: absolute;
+                left: 100px;
+                top: 520px;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 14px;
+                letter-spacing: 0.08em;
+                color: var(--h);
+                opacity: 0.86;
+            }
+            .s-cover .bigline {
+                position: absolute;
+                left: 72px;
+                top: 96px;
+                width: 1px;
+                height: 520px;
+                background: var(--g);
+                opacity: 0.6;
+            }
+            .s-cover .ghost {
+                width: 560px;
+                top: 96px;
+                right: -90px;
+                opacity: 0.07;
+            }
+            .s-index .idx {
+                grid-column: 2/12;
+                grid-row: 2;
+                display: grid;
+                align-content: center;
+                gap: 0;
+            }
+            .s-index .row {
+                display: grid;
+                grid-template-columns: 100px 1fr;
+                align-items: center;
+                padding: 14px 0;
+                border-bottom: 1px solid rgba(201, 162, 39, 0.45);
+            }
+            .s-index .row:first-child {
+                border-top: 1px solid var(--g);
+            }
+            .s-index .row .n {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 30px;
+                color: var(--l);
+            }
+            .s-index .row .t {
+                font-family: "Cormorant Garamond", serif;
+                font-size: 38px;
+                color: var(--h);
+            }
+            .s-index .watermark {
+                position: absolute;
+                right: 88px;
+                top: 178px;
+                font-family: "Cormorant Garamond", serif;
+                font-size: 280px;
+                color: var(--g);
+                opacity: 0.07;
+                line-height: 1;
+            }
+            .s-statement .lines {
+                grid-column: 2/12;
+                grid-row: 2;
+                align-self: center;
+            }
+            .s-statement .line {
+                padding: 18px 0;
+                border-bottom: 1px solid rgba(201, 162, 39, 0.5);
+            }
+            .s-statement .line:first-child {
+                border-top: 1px solid var(--g);
+            }
+            .s-statement .line:nth-child(1) .t {
+                font-size: 70px;
+                margin-left: 0;
+            }
+            .s-statement .line:nth-child(2) .t {
+                font-size: 60px;
+                margin-left: 90px;
+            }
+            .s-statement .line:nth-child(3) .t {
+                font-size: 52px;
+                margin-left: 180px;
+            }
+            .s-statement .t {
+                font-family: "Cormorant Garamond", serif;
+                color: var(--h);
+            }
+            .s-statement .d {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 12px;
+                color: var(--g);
+                letter-spacing: 0.18em;
+                margin-bottom: 4px;
+            }
+            .s-manifesto .arrow {
+                grid-column: 1/3;
+                grid-row: 2;
+                align-self: center;
+                font-family: "Cormorant Garamond", serif;
+                font-size: 150px;
+                color: var(--g);
+                line-height: 0.7;
+            }
+            .s-manifesto .claim {
+                grid-column: 3/12;
+                grid-row: 2;
+                align-self: center;
+            }
+            .s-manifesto .claim h2 {
+                font-size: 62px;
+                max-width: 800px;
+            }
+            .s-manifesto .claim .rule {
+                width: 70%;
+                margin: 30px 0 24px;
+            }
+            .s-manifesto .scope {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px 36px;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 16px;
+                color: var(--h);
+            }
+            .s-manifesto .scope span {
+                color: var(--l);
+            }
+            .s-specimen .spec {
+                grid-column: 2/12;
+                grid-row: 2;
+                align-self: center;
+            }
+            .s-specimen .big {
+                font-family: "Cormorant Garamond", serif;
+                font-size: 84px;
+                line-height: 1.02;
+                color: var(--h);
+            }
+            .s-specimen .mid {
+                font-family: "Cormorant Garamond", serif;
+                font-size: 54px;
+                color: var(--l);
+                padding-left: 120px;
+            }
+            .s-specimen .small {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 19px;
+                color: var(--h);
+                padding-left: 250px;
+                letter-spacing: 0.04em;
+            }
+            .s-specimen .slash {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 13px;
+                color: var(--g);
+                letter-spacing: 0.2em;
+                margin: 18px 0;
+            }
+            .s-diagram .frame {
+                grid-column: 1/13;
+                grid-row: 2;
+                align-self: center;
+                border-top: 1px solid var(--g);
+                padding-top: 14px;
+            }
+            .s-diagram figure {
+                border: 0;
+                padding: 0;
+            }
+            .s-diagram figcaption {
+                padding-top: 8px;
+            }
+            .s-diagram .note {
+                position: absolute;
+                right: 22px;
+                bottom: 70px;
+                transform: rotate(-90deg);
+                transform-origin: right bottom;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 10px;
+                letter-spacing: 0.22em;
+                color: var(--l);
+            }
+            .s-figure .copy {
+                grid-column: 1/4;
+                grid-row: 2;
+                align-self: center;
+            }
+            .s-figure .copy .n {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 46px;
+                color: var(--g);
+                display: block;
+                margin-bottom: 8px;
+            }
+            .s-figure .copy p {
+                font-family: "Cormorant Garamond", serif;
+                font-size: 34px;
+                line-height: 1.1;
+            }
+            .s-figure .shot {
+                grid-column: 4/13;
+                grid-row: 2;
+                align-self: center;
+                transform: rotate(-0.8deg);
+            }
+            .s-figure .shot img {
+                max-height: 390px;
+            }
+            .s-duo .a {
+                grid-column: 1/7;
+                grid-row: 2;
+                align-self: start;
+                transform: rotate(1deg);
+            }
+            .s-duo .b {
+                grid-column: 7/13;
+                grid-row: 2;
+                align-self: end;
+                transform: rotate(-1.2deg);
+            }
+            .s-duo .a img,
+            .s-duo .b img {
+                max-height: 290px;
+            }
+            .s-duo .captionbar {
+                position: absolute;
+                left: 72px;
+                right: 72px;
+                bottom: 62px;
+                border-top: 1px solid rgba(201, 162, 39, 0.5);
+                padding-top: 8px;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 12px;
+                color: var(--l);
+                display: flex;
+                justify-content: space-between;
+            }
+            .s-pair .left {
+                grid-column: 1/8;
+                grid-row: 2;
+                align-self: start;
+            }
+            .s-pair .right {
+                grid-column: 8/13;
+                grid-row: 2;
+                align-self: end;
+                transform: rotate(1.4deg);
+            }
+            .s-pair .left img {
+                max-height: 330px;
+            }
+            .s-pair .right img {
+                max-height: 250px;
+            }
+            .s-quote .q {
+                grid-column: 1/8;
+                grid-row: 2;
+                align-self: center;
+            }
+            .s-quote .q .code {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 52px;
+                color: var(--l);
+                line-height: 1.1;
+            }
+            .s-quote .q .rule {
+                width: 180px;
+                margin: 28px 0;
+            }
+            .s-quote .q .note {
+                font-family: "Cormorant Garamond", serif;
+                font-size: 32px;
+                color: var(--h);
+            }
+            .s-quote .shot {
+                grid-column: 8/13;
+                grid-row: 2;
+                align-self: center;
+                transform: rotate(-1deg);
+            }
+            .s-quote .shot img {
+                max-height: 330px;
+            }
+            .s-flow .f {
+                grid-column: 1/13;
+                grid-row: 2;
+                align-self: center;
+                border-top: 1px solid var(--g);
+                padding-top: 16px;
+            }
+            .s-matrix .m {
+                grid-column: 1/13;
+                grid-row: 2;
+                align-self: center;
+                display: grid;
+                grid-template-columns: repeat(12, 1fr);
+                row-gap: 18px;
+                column-gap: 24px;
+            }
+            .s-matrix .cell {
+                border-top: 1px solid var(--g);
+                padding-top: 10px;
+            }
+            .s-matrix .cell b {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 24px;
+                color: var(--g);
+                display: block;
+                margin-bottom: 6px;
+            }
+            .s-matrix .cell p {
+                font-family: "Inter", sans-serif;
+                font-size: 18px;
+                color: var(--h);
+            }
+            .s-matrix .c1 {
+                grid-column: 1/5;
+            }
+            .s-matrix .c2 {
+                grid-column: 5/9;
+            }
+            .s-matrix .c3 {
+                grid-column: 9/13;
+            }
+            .s-matrix .c4 {
+                grid-column: 2/6;
+            }
+            .s-matrix .c5 {
+                grid-column: 6/10;
+            }
+            .s-matrix .c6 {
+                grid-column: 10/13;
+            }
+            .s-pairs .symptoms {
+                grid-column: 1/6;
+                grid-row: 2;
+                align-self: start;
+            }
+            .s-pairs .solutions {
+                grid-column: 7/13;
+                grid-row: 2;
+                align-self: start;
+            }
+            .s-pairs h3 {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 12px;
+                letter-spacing: 0.22em;
+                color: var(--g);
+                margin-bottom: 14px;
+            }
+            .s-pairs li {
+                font-family: "Inter", sans-serif;
+                font-size: 17px;
+                padding: 11px 0;
+                border-bottom: 1px solid rgba(201, 162, 39, 0.35);
+            }
+            .s-pairs .evidence {
+                grid-column: 7/13;
+                grid-row: 2;
+                align-self: end;
+                transform: rotate(0.7deg);
+            }
+            .s-pairs .evidence img {
+                max-height: 150px;
+            }
+            .s-pairs .connector {
+                position: absolute;
+                left: 49%;
+                top: 180px;
+                width: 1px;
+                height: 330px;
+                background: var(--g);
+                opacity: 0.5;
+                transform: rotate(8deg);
+            }
+            .s-metrics .figure {
+                position: absolute;
+                font-family: "Cormorant Garamond", serif;
+                color: var(--l);
+                line-height: 0.8;
+            }
+            .s-metrics .f1 {
+                left: 100px;
+                top: 150px;
+                font-size: 128px;
+            }
+            .s-metrics .f2 {
+                left: 560px;
+                top: 250px;
+                font-size: 112px;
+            }
+            .s-metrics .f3 {
+                left: 250px;
+                top: 430px;
+                font-size: 96px;
+            }
+            .s-metrics .f4 {
+                left: 800px;
+                top: 400px;
+                font-size: 88px;
+            }
+            .s-metrics .lab {
+                position: absolute;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 12px;
+                color: var(--h);
+                letter-spacing: 0.08em;
+                border-top: 1px solid var(--g);
+                padding-top: 6px;
+            }
+            .s-metrics .l1 {
+                left: 104px;
+                top: 286px;
+                width: 300px;
+            }
+            .s-metrics .l2 {
+                left: 564px;
+                top: 370px;
+                width: 280px;
+            }
+            .s-metrics .l3 {
+                left: 254px;
+                top: 532px;
+                width: 250px;
+            }
+            .s-metrics .l4 {
+                left: 804px;
+                top: 496px;
+                width: 260px;
+            }
+            .s-hero .hero {
+                grid-column: 1/13;
+                grid-row: 2;
+                align-self: center;
+                position: relative;
+            }
+            .s-hero .hero img {
+                max-height: 420px;
+                object-fit: cover;
+            }
+            .s-hero .overlay {
+                position: absolute;
+                left: -1px;
+                bottom: -1px;
+                background: var(--k);
+                border: 1px solid var(--g);
+                padding: 10px 14px;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 12px;
+                color: var(--l);
+                max-width: 640px;
+            }
+            .s-road .steps {
+                grid-column: 2/12;
+                grid-row: 2;
+                align-self: center;
+            }
+            .s-road .step {
+                display: grid;
+                grid-template-columns: 76px 1fr;
+                gap: 18px;
+                align-items: center;
+                padding: 10px 0;
+                border-bottom: 1px solid rgba(201, 162, 39, 0.4);
+            }
+            .s-road .step .n {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 26px;
+                color: var(--g);
+            }
+            .s-road .step .t {
+                font-family: "Cormorant Garamond", serif;
+                font-size: 32px;
+            }
+            .s-road .step.hot .t {
+                color: var(--l);
+            }
+            .s-close .ctr {
+                grid-column: 2/12;
+                grid-row: 2;
+                align-self: center;
+                text-align: center;
+            }
+            .s-close .ctr img {
+                width: 150px;
+                opacity: 0.9;
+            }
+            .s-close .ctr h2 {
+                font-size: 76px;
+                margin-top: 22px;
+            }
+            .s-close .ctr .rule {
+                width: 220px;
+                margin: 24px auto;
+            }
+            .s-close .ctr p {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 14px;
+                letter-spacing: 0.2em;
+                color: var(--l);
+            }
+            .nav {
+                position: fixed;
+                bottom: 14px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                z-index: 30;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 11px;
+                color: var(--g);
+            }
+            .nav button {
+                background: var(--k);
+                color: var(--l);
+                border: 1px solid var(--g);
+                padding: 5px 11px;
+                cursor: pointer;
+                font: inherit;
+                letter-spacing: 0.1em;
+            }
+            .nav button:hover {
+                background: var(--g);
+                color: var(--k);
+            }
+            .progress {
+                width: 140px;
+                height: 1px;
+                background: rgba(201, 162, 39, 0.35);
+            }
+            .progress i {
+                display: block;
+                height: 1px;
+                background: var(--l);
+                transition: width 0.35s ease;
+            }
+            @media print {
+                @page {
+                    size: 13.333in 7.5in;
+                    margin: 0;
+                }
+                html,
+                body,
+                .stage,
+                .deck {
+                    width: auto !important;
+                    height: auto !important;
+                    overflow: visible !important;
+                    box-shadow: none;
+                    background: var(--c) !important;
+                }
+                .stage {
+                    display: block;
+                }
+                .deck {
+                    position: static;
+                }
+                .slide,
+                .slide.active {
+                    position: relative !important;
+                    inset: auto !important;
+                    display: block !important;
+                    width: 13.333in !important;
+                    height: 7.5in !important;
+                    break-after: page;
+                    page-break-after: always;
+                    -webkit-print-color-adjust: exact;
+                    print-color-adjust: exact;
+                }
+                .slide:last-child {
+                    break-after: auto;
+                    page-break-after: auto;
+                }
+                .nav {
+                    display: none !important;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="stage">
+            <main class="deck" id="deck">
+                <section class="slide s-cover active">
+                    <img
+                        class="ghost"
+                        src="assets/iconos/monograma.svg"
+                        alt=""
+                    />
+                    <div class="bigline"></div>
+                    <img
+                        class="mark"
+                        src="assets/iconos/monograma.svg"
+                        alt="Monograma GA"
+                    />
+                    <div class="canvas">
+                        <div class="eyebrow">
+                            SENA · ADSO · PROYECTO INTEGRADOR
+                        </div>
+                        <div class="folio">01 / 18</div>
+                        <h1>Gestor ADSO</h1>
+                        <p class="sub">CRUD de aprendices con Laravel</p>
+                        <p class="meta">
+                            Ficha 3412760 · Instructor Gustavo Bolaños ·
+                            Noviembre de 2026
+                        </p>
+                        <div class="bottom">
+                            <b>GESTOR ADSO</b
+                            ><span>ATELIER EDITORIAL · 2026</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide s-index">
+                    <div class="ghost" hidden></div>
+                    <div class="watermark">18</div>
+                    <div class="vlabel">SUMARIO</div>
+                    <div class="canvas">
+                        <div class="eyebrow">ÍNDICE</div>
+                        <div class="folio">02 / 18</div>
+                        <div class="idx">
+                            <div class="row">
+                                <span class="n">01</span
+                                ><span class="t">Contexto y stack</span>
+                            </div>
+                            <div class="row">
+                                <span class="n">06</span
+                                ><span class="t">Arquitectura y módulos</span>
+                            </div>
+                            <div class="row">
+                                <span class="n">11</span
+                                ><span class="t"
+                                    >Acceso, flujo y seguridad</span
+                                >
+                            </div>
+                            <div class="row">
+                                <span class="n">15</span
+                                ><span class="t">Estado, demo y cierre</span>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <b>GESTOR ADSO</b><span>CUATRO MOVIMIENTOS</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide s-statement">
+                    <img
+                        class="ghost"
+                        src="assets/iconos/monograma.svg"
+                        alt=""
+                    />
+                    <div class="vlabel">HALLAZGO</div>
+                    <div class="canvas">
+                        <div class="eyebrow">03 · CONTEXTO</div>
+                        <div class="folio">03 / 18</div>
+                        <div class="lines">
+                            <div class="line">
+                                <div class="d">01 · PERSISTENCIA</div>
+                                <div class="t">Datos simulados.</div>
+                            </div>
+                            <div class="line">
+                                <div class="d">02 · VALIDACIÓN</div>
+                                <div class="t">Reglas dispersas.</div>
+                            </div>
+                            <div class="line">
+                                <div class="d">03 · ACCESO</div>
+                                <div class="t">Rutas abiertas.</div>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <b>ANTES DE LA SEMANA 4</b><span>DOCX v04</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide s-manifesto">
+                    <img
+                        class="ghost"
+                        src="assets/iconos/monograma.svg"
+                        alt=""
+                    />
+                    <div class="canvas">
+                        <div class="eyebrow">04 · OBJETIVO</div>
+                        <div class="folio">04 / 18</div>
+                        <div class="arrow">→</div>
+                        <div class="claim">
+                            <h2>CRUD validado para aprendices.</h2>
+                            <div class="rule"></div>
+                            <div class="scope">
+                                <div>
+                                    <span>01</span> Alta, listado, edición y
+                                    baja.
+                                </div>
+                                <div>
+                                    <span>02</span> Búsqueda por nombre o
+                                    documento.
+                                </div>
+                                <div><span>03</span> Cuenta verificada.</div>
+                                <div>
+                                    <span>04</span> Roles: [POR CONFIRMAR]
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom"><b>UN MÓDULO · APRENDICES</b></div>
+                    </div>
+                </section>
+
+                <section class="slide s-specimen">
+                    <img
+                        class="ghost"
+                        src="assets/iconos/monograma.svg"
+                        alt=""
+                    />
+                    <div class="vlabel">VERSIONES REALES</div>
+                    <div class="canvas">
+                        <div class="eyebrow">05 · STACK</div>
+                        <div class="folio">05 / 18</div>
+                        <div class="spec">
+                            <div class="big">PHP 8.2 · Laravel 12.69.3</div>
+                            <div class="slash">
+                                ────────────────────────────
+                            </div>
+                            <div class="mid">MariaDB 13.0.2</div>
+                            <div class="small">
+                                Blade · Eloquent · Form Request · Breeze 2.4.2 ·
+                                Vite · Tailwind
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <b>COMPOSER.LOCK · .ENV · PACKAGE.JSON</b
+                            ><span>VERIFICADO</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide s-diagram">
+                    <img
+                        class="ghost"
+                        src="assets/iconos/monograma.svg"
+                        alt=""
+                    />
+                    <div class="canvas">
+                        <div class="eyebrow">06 · ARQUITECTURA</div>
+                        <div class="folio">06 / 18</div>
+                        <div class="frame">
+                            <figure>
+                                <img
+                                    src="assets/diagramas/arquitectura.svg"
+                                    alt="Capas del sistema"
+                                />
+                                <figcaption>
+                                    web.php → auth → Request → Controlador →
+                                    Modelo → MariaDB → Blade.
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="bottom">
+                            <b>UNA RESPONSABILIDAD POR CAPA</b
+                            ><span>FIG. 06</span>
+                        </div>
+                    </div>
+                    <div class="note">CÓDIGO REAL</div>
+                </section>
+
+                <section class="slide s-diagram">
+                    <img
+                        class="ghost"
+                        src="assets/iconos/monograma.svg"
+                        alt=""
+                    />
+                    <div class="canvas">
+                        <div class="eyebrow">07 · MODELO DE DATOS</div>
+                        <div class="folio">07 / 18</div>
+                        <div class="frame">
+                            <figure>
+                                <img
+                                    src="assets/diagramas/modelo-datos.svg"
+                                    alt="Dos tablas"
+                                />
+                                <figcaption>
+                                    ficha_id no declara FK; entidad Ficha: [POR
+                                    CONFIRMAR].
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="bottom">
+                            <b>APRENDICES · USERS</b><span>FIG. 07</span>
+                        </div>
+                    </div>
+                    <div class="note">MIGRACIONES</div>
+                </section>
+
+                <section class="slide s-figure">
+                    <img
+                        class="ghost"
+                        src="assets/iconos/monograma.svg"
+                        alt=""
+                    />
+                    <div class="canvas">
+                        <div class="eyebrow">08 · MÓDULO 01</div>
+                        <div class="folio">08 / 18</div>
+                        <div class="copy">
+                            <span class="n">01</span>
+                            <p>Listado<br />y búsqueda</p>
+                            <div
+                                class="rule"
+                                style="width: 80px; margin-top: 18px"
+                            ></div>
+                            <small
+                                >when() · paginate(10)<br />withQueryString()</small
+                            >
+                        </div>
+                        <figure class="shot">
+                            <span class="tag">FIG. 08 · CAPTURA EN VIVO</span
+                            ><img
+                                src="assets/capturas/05-busqueda-vivo.png"
+                                alt="Búsqueda ?q=Alexis"
+                            />
+                            <figcaption>
+                                Panel con ?q=Alexis: un resultado, filtro y
+                                paginación.
+                            </figcaption>
+                        </figure>
+                        <div class="bottom">
+                            <b>APRENDICES/INDEX.BLADE.PHP</b
+                            ><span>GET /APRENDICES</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide s-duo">
+                    <img
+                        class="ghost"
+                        src="assets/iconos/monograma.svg"
+                        alt=""
+                    />
+                    <div class="canvas">
+                        <div class="eyebrow">09 · MÓDULO 02</div>
+                        <div class="folio">09 / 18</div>
+                        <figure class="a">
+                            <span class="tag">FIG. 09A</span
+                            ><img
+                                src="assets/capturas/04-formulario-crear-vivo.png"
+                                alt="Formulario de alta"
+                            />
+                            <figcaption>Alta real: modelo vacío.</figcaption>
+                        </figure>
+                        <figure class="b">
+                            <span class="tag">FIG. 09B · SEMANA 4</span
+                            ><img
+                                src="assets/capturas/06-editar-historico-taca2.png"
+                                alt="Formulario de edición histórico"
+                            />
+                            <figcaption>
+                                Edición histórica: datos precargados.
+                            </figcaption>
+                        </figure>
+                        <div class="bottom">
+                            <b>PARCIAL _FORM.BLADE.PHP</b
+                            ><span>OLD() · MODEL BINDING</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide s-pair">
+                    <img
+                        class="ghost"
+                        src="assets/iconos/monograma.svg"
+                        alt=""
+                    />
+                    <div class="canvas">
+                        <div class="eyebrow">10 · MÓDULO 03</div>
+                        <div class="folio">10 / 18</div>
+                        <figure class="left">
+                            <span class="tag">FIG. 10A · CAPTURA EN VIVO</span
+                            ><img
+                                src="assets/capturas/07-errores-validacion-vivo.png"
+                                alt="Error de documento duplicado"
+                            />
+                            <figcaption>
+                                Unique real: «El documento ya existe».
+                            </figcaption>
+                        </figure>
+                        <figure class="right">
+                            <span class="tag">FIG. 10B · TACA2</span
+                            ><img
+                                src="assets/capturas/08-confirmar-eliminacion-taca2.png"
+                                alt="Confirmación de borrado"
+                            />
+                            <figcaption>confirm() antes de DELETE.</figcaption>
+                        </figure>
+                        <div class="bottom">
+                            <b>FORM REQUEST + DESTROY()</b
+                            ><span>IGUALDAD Y BORRADO</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide s-quote">
+                    <img
+                        class="ghost"
+                        src="assets/iconos/monograma.svg"
+                        alt=""
+                    />
+                    <div class="vlabel">AUTORIZACIÓN</div>
+                    <div class="canvas">
+                        <div class="eyebrow">11 · ACCESO</div>
+                        <div class="folio">11 / 18</div>
+                        <div class="q">
+                            <div class="code">authorize()<br />→ true</div>
+                            <div class="rule"></div>
+                            <div class="note">
+                                auth + verified protege cada ruta.
+                            </div>
+                            <small style="display: block; margin-top: 18px"
+                                >Roles: [POR CONFIRMAR]</small
+                            >
+                        </div>
+                        <figure class="shot">
+                            <span class="tag">FIG. 11 · LOGIN</span
+                            ><img
+                                src="assets/capturas/01-login-vivo.png"
+                                alt="Ingreso al sistema"
+                            />
+                            <figcaption>La raíz redirige aquí.</figcaption>
+                        </figure>
+                        <div class="bottom">
+                            <b>ROUTES/WEB.PHP</b><span>BREEZE</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide s-flow">
+                    <img
+                        class="ghost"
+                        src="assets/iconos/monograma.svg"
+                        alt=""
+                    />
+                    <div class="canvas">
+                        <div class="eyebrow">12 · FLUJO CRÍTICO</div>
+                        <div class="folio">12 / 18</div>
+                        <div class="f">
+                            <figure>
+                                <img
+                                    src="assets/diagramas/flujo-critico.svg"
+                                    alt="Flujo de alta"
+                                />
+                                <figcaption>
+                                    POST → validar → persistir → redirigir →
+                                    flash. Si falla: old() y errores.
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="bottom">
+                            <b>STORE() · VALIDATED() · WITH('OK')</b
+                            ><span>FIG. 12</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide s-matrix">
+                    <img
+                        class="ghost"
+                        src="assets/iconos/monograma.svg"
+                        alt=""
+                    />
+                    <div class="canvas">
+                        <div class="eyebrow">13 · SEGURIDAD</div>
+                        <div class="folio">13 / 18</div>
+                        <div class="m">
+                            <div class="cell c1">
+                                <b>01</b>
+                                <p>@csrf en cada formulario.</p>
+                            </div>
+                            <div class="cell c2">
+                                <b>02</b>
+                                <p>@method simula PUT/DELETE.</p>
+                            </div>
+                            <div class="cell c3">
+                                <b>03</b>
+                                <p>unique() con ignore($id).</p>
+                            </div>
+                            <div class="cell c4">
+                                <b>04</b>
+                                <p>$fillable filtra asignación.</p>
+                            </div>
+                            <div class="cell c5">
+                                <b>05</b>
+                                <p>password hasheado.</p>
+                            </div>
+                            <div class="cell c6">
+                                <b>06</b>
+                                <p>Middleware verifica cuenta.</p>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <b>SEIS MEDIDAS VERIFICADAS</b
+                            ><span>SIN ROLES</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide s-pairs">
+                    <img
+                        class="ghost"
+                        src="assets/iconos/monograma.svg"
+                        alt=""
+                    />
+                    <div class="connector"></div>
+                    <div class="canvas">
+                        <div class="eyebrow">14 · RETOS</div>
+                        <div class="folio">14 / 18</div>
+                        <div class="symptoms">
+                            <h3>SÍNTOMA</h3>
+                            <ul>
+                                <li>Duplicado al editar.</li>
+                                <li>Filtro perdido.</li>
+                                <li>Borrado accidental.</li>
+                                <li>419 Page Expired.</li>
+                            </ul>
+                        </div>
+                        <div class="solutions">
+                            <h3>SOLUCIÓN</h3>
+                            <ul>
+                                <li>ignore($id).</li>
+                                <li>withQueryString().</li>
+                                <li>confirm().</li>
+                                <li>@csrf.</li>
+                            </ul>
+                        </div>
+                        <figure class="evidence">
+                            <span class="tag">FIG. 14 · ERROR REAL</span
+                            ><img
+                                src="assets/capturas/12-error-parametro-vivo.png"
+                                alt="Error 500 por parámetro"
+                            />
+                            <figcaption>{aprendice} ≠ $aprendiz.</figcaption>
+                        </figure>
+                        <div class="bottom">
+                            <b>PENDIENTE: PARÁMETRO</b><span>HTTP 500</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide s-metrics">
+                    <img
+                        class="ghost"
+                        src="assets/iconos/monograma.svg"
+                        alt=""
+                    />
+                    <div class="canvas">
+                        <div class="eyebrow">15 · ESTADO</div>
+                        <div class="folio">15 / 18</div>
+                        <div class="figure f1">25</div>
+                        <div class="lab l1">pruebas · 62 aserciones</div>
+                        <div class="figure f2">50</div>
+                        <div class="lab l2">aprendices en MariaDB</div>
+                        <div class="figure f3">7</div>
+                        <div class="lab l3">rutas del recurso</div>
+                        <div class="figure f4">5</div>
+                        <div class="lab l4">migraciones ejecutadas</div>
+                        <div class="bottom">
+                            <b>PHP ARTISAN TEST · MIGRATE:STATUS</b
+                            ><span>MEDICIÓN REAL</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide s-hero">
+                    <img
+                        class="ghost"
+                        src="assets/iconos/monograma.svg"
+                        alt=""
+                    />
+                    <div class="canvas">
+                        <div class="eyebrow">16 · DEMO</div>
+                        <div class="folio">16 / 18</div>
+                        <figure class="hero">
+                            <span class="tag">FIG. 16 · PANTALLA EN VIVO</span
+                            ><img
+                                src="assets/capturas/03-panel-aprendices-vivo.png"
+                                alt="Panel principal"
+                            />
+                            <div class="overlay">
+                                50 registros · búsqueda · paginación · acciones
+                                de edición y baja
+                            </div>
+                        </figure>
+                        <div class="bottom">
+                            <b>HTTP://127.0.0.1/APRENDICES</b
+                            ><span>SESIÓN VERIFICADA</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide s-road">
+                    <img
+                        class="ghost"
+                        src="assets/iconos/monograma.svg"
+                        alt=""
+                    />
+                    <div class="vlabel">SIGUIENTE</div>
+                    <div class="canvas">
+                        <div class="eyebrow">17 · ROADMAP</div>
+                        <div class="folio">17 / 18</div>
+                        <div class="steps">
+                            <div class="step">
+                                <span class="n">01</span
+                                ><span class="t"
+                                    >Alinear {aprendice} con $aprendiz.</span
+                                >
+                            </div>
+                            <div class="step hot">
+                                <span class="n">02</span
+                                ><span class="t"
+                                    >Declarar la FK de ficha_id.</span
+                                >
+                            </div>
+                            <div class="step">
+                                <span class="n">03</span
+                                ><span class="t"
+                                    >Definir roles y permisos.</span
+                                >
+                            </div>
+                            <div class="step">
+                                <span class="n">04</span
+                                ><span class="t"
+                                    >Traducir mensajes de Breeze.</span
+                                >
+                            </div>
+                            <div class="step">
+                                <span class="n">05</span
+                                ><span class="t">Revisar show().</span>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <b>CINCO ACCIONES CONCRETAS</b><span>2026</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide s-close">
+                    <img
+                        class="ghost"
+                        src="assets/iconos/monograma.svg"
+                        alt=""
+                    />
+                    <div class="canvas">
+                        <div class="eyebrow">18 · CIERRE</div>
+                        <div class="folio">18 / 18</div>
+                        <div class="ctr">
+                            <img
+                                src="assets/iconos/monograma.svg"
+                                alt="Monograma GA"
+                            />
+                            <h2>Listo para exponer</h2>
+                            <div class="rule"></div>
+                            <p>CRUD REAL · VALIDADO · PROTEGIDO</p>
+                        </div>
+                        <div class="bottom">
+                            <b>GESTOR ADSO · SENA · ADSO</b><span>FIN</span>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+        <nav class="nav" aria-label="Navegación">
+            <button type="button" data-nav="prev" aria-label="Anterior">
+                ←</button
+            ><span id="counter">01 / 18</span>
+            <div class="progress"><i id="bar" style="width: 5.55%"></i></div>
+            <button type="button" data-nav="next" aria-label="Siguiente">
+                →
+            </button>
+        </nav>
+        <script>
+            (function () {
+                var slides = [].slice.call(document.querySelectorAll(".slide"));
+                slides.forEach(function (s) {
+                    var furniture = document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "svg",
+                    );
+                    furniture.setAttribute("class", "furniture");
+                    furniture.setAttribute("viewBox", "0 0 1280 720");
+                    furniture.innerHTML =
+                        '<g stroke="#C9A227" stroke-width="1" fill="none" opacity=".55">' +
+                        '<path d="M28 58V28H58M1222 28H1252V58M28 662V692H58M1222 692H1252V662"/>' +
+                        '<path d="M640 18v18M631 27h18M640 684v18M631 693h18"/>' +
+                        '<path d="M36 360h16M1228 360h16"/></g>';
+                    s.appendChild(furniture);
+                });
+                var counter = document.getElementById("counter"),
+                    bar = document.getElementById("bar"),
+                    i = 0;
+                function go(n) {
+                    i = (n + slides.length) % slides.length;
+                    slides.forEach(function (s, k) {
+                        s.classList.toggle("active", k === i);
+                    });
+                    counter.textContent =
+                        ("0" + (i + 1)).slice(-2) +
+                        " / " +
+                        ("0" + slides.length).slice(-2);
+                    bar.style.width = ((i + 1) / slides.length) * 100 + "%";
+                }
+                document.addEventListener("keydown", function (e) {
+                    if (
+                        ["ArrowRight", "ArrowDown", " ", "PageDown"].indexOf(
+                            e.key,
+                        ) >= 0
+                    ) {
+                        e.preventDefault();
+                        go(i + 1);
+                    } else if (
+                        ["ArrowLeft", "ArrowUp", "PageUp"].indexOf(e.key) >= 0
+                    ) {
+                        e.preventDefault();
+                        go(i - 1);
+                    } else if (e.key === "Home") {
+                        go(0);
+                    } else if (e.key === "End") {
+                        go(slides.length - 1);
+                    }
+                });
+                document.querySelectorAll("[data-nav]").forEach(function (b) {
+                    b.addEventListener("click", function () {
+                        go(
+                            i +
+                                (b.getAttribute("data-nav") === "next"
+                                    ? 1
+                                    : -1),
+                        );
+                    });
+                });
+                go(0);
+            })();
+        </script>
+    </body>
+</html>

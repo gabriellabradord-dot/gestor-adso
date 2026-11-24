@@ -17,7 +17,13 @@
                 <h1>Aprendices</h1>
                 <p class="apprentices-subtitle">Consulta y administra los registros de formación.</p>
             </div>
-            <a class="apprentices-primary" href="{{ route('aprendices.create') }}"><span aria-hidden="true">+</span> Nuevo aprendiz</a>
+            <div class="apprentices-header-actions">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button class="apprentices-logout" type="submit">Cerrar sesión</button>
+                </form>
+                <a class="apprentices-primary" href="{{ route('aprendices.create') }}"><span aria-hidden="true">+</span> Nuevo aprendiz</a>
+            </div>
         </header>
 
         @if(session('ok'))

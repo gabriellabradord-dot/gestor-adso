@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" role="img" aria-label="Flujo crítico de alta de aprendiz">
+  <rect width="1200" height="420" fill="#141414"/>
+  <g stroke="#C9A227" stroke-width="1" fill="none" opacity=".5"><path d="M40 30H1160V390H40Z"/></g>
+  <g text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="26" fill="#E8C766">
+    <text x="130" y="150">1 · Formulario</text>
+    <text x="340" y="150">2 · Validar</text>
+    <text x="550" y="150">3 · Persistir</text>
+    <text x="760" y="150">4 · Redirigir</text>
+    <text x="970" y="150">5 · Informar</text>
+  </g>
+  <g text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="15" fill="#F5F1E8" opacity=".85">
+    <text x="130" y="185">POST /aprendices</text>
+    <text x="340" y="185">Form Request</text>
+    <text x="550" y="185">Aprendiz::create</text>
+    <text x="760" y="185">index</text>
+    <text x="970" y="185">with('ok')</text>
+  </g>
+  <g stroke="#E8C766" stroke-width="2" fill="none">
+    <path d="M225 168H310M435 168H520M645 168H730M855 168H940"/>
+  </g>
+  <g fill="#E8C766"><path d="M310 163l10 5-10 5zM520 163l10 5-10 5zM730 163l10 5-10 5zM940 163l10 5-10 5z"/></g>
+  <line x1="90" y1="245" x2="1110" y2="245" stroke="#C9A227" stroke-width="1"/>
+  <text x="600" y="295" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" fill="#F5F1E8">Si falla la validación: vuelve al formulario con errores y valores old()</text>
+  <text x="600" y="335" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" fill="#F5F1E8">La tabla se reconstruye con latest(), paginate(10) y withQueryString()</text>
+</svg>

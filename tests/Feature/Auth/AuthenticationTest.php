@@ -51,4 +51,14 @@ class AuthenticationTest extends TestCase
         $this->assertGuest();
         $response->assertRedirect('/');
     }
+
+    public function test_authenticated_apprentice_list_shows_logout_button(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route('aprendices.index'));
+
+        $response->assertOk();
+        $response->assertSee('Cerrar sesión');
+    }
 }

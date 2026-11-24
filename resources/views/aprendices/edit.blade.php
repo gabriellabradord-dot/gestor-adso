@@ -14,7 +14,7 @@
             <p class="text-xs text-gray-500 mt-1 uppercase tracking-wider">Gestor ADSO / Base de datos</p>
         </div>
 
-        <form action="{{ route('aprendices.update', $aprendiz) }}" method="POST">
+        <form action="{{ route('aprendices.update', ['aprendiz' => $aprendiz]) }}" method="POST">
             @method('PUT')
             @include('aprendices._form', ['aprendiz' => $aprendiz])
         </form>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Monograma GA">
+  <rect width="120" height="120" fill="#0A0A0A"/>
+  <rect x="12" y="12" width="96" height="96" fill="none" stroke="#C9A227" stroke-width="1"/>
+  <path d="M28 88L52 32h8l24 56M37 68h34" fill="none" stroke="#E8C766" stroke-width="3" stroke-linecap="square"/>
+  <path d="M62 32h28v56M62 60h24" fill="none" stroke="#C9A227" stroke-width="3"/>
+  <path d="M12 12l12 12M108 12L96 24M12 108l12-12M108 108L96 96" stroke="#C9A227" stroke-width="1"/>
+</svg>

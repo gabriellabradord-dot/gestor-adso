@@ -333,6 +333,17 @@
     border-bottom: 1px solid #dfe7df;
 }
 
+.apprentices-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.apprentices-header-actions form {
+    display: flex;
+    margin: 0;
+}
+
 .apprentices-eyebrow {
     margin: 0 0 9px;
     color: #4a7958;
@@ -359,6 +370,7 @@
 }
 
 .apprentices-primary,
+.apprentices-logout,
 .apprentices-search-button,
 .apprentices-clear,
 .apprentices-action {
@@ -386,6 +398,23 @@
 
 .apprentices-primary:hover {
     background: #104c31;
+}
+
+.apprentices-logout {
+    padding: 0 16px;
+    border: 1px solid #cbd7cd;
+    background: transparent;
+    color: #33473a;
+    font-family: inherit;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.apprentices-logout:hover {
+    border-color: #aabdad;
+    background: #e9f1e8;
+    color: #17291e;
 }
 
 .apprentices-primary span {
@@ -746,6 +775,20 @@
     }
 
     .apprentices-primary {
+        width: 100%;
+    }
+
+    .apprentices-header-actions {
+        width: 100%;
+    }
+
+    .apprentices-header-actions > *,
+    .apprentices-header-actions form,
+    .apprentices-logout {
+        flex: 1;
+    }
+
+    .apprentices-logout {
         width: 100%;
     }
 
